@@ -1,6 +1,7 @@
-
 from tkinter import *
 from tkinter.filedialog import *
+
+from sqlalchemy import column
 
 from gestion_personnages import GestionPersonnages
 
@@ -29,19 +30,38 @@ class Interface(Frame):
         self.master.config(menu=self.menubar)
 
         # frame 1 (droite)
-
-
+        self.frame1 = Frame(self)
+        self.frame1.grid(row=0, column=1)
         # frame 2 (gauche)
-
-
+        self.frame2 = Frame(self)
+        self.frame2.grid(row=0, column=0)
         # Ajout de labels dans les frames
-
+        
 
         # Ajout du listbox
-
-
+        self.scrollbar = Scrollbar(self.frame2, orient="vertical")
+        self.listbox = Listbox(self.frame2, height= 25, width=80)
+        self.listbox.grid(row=0, column=0)
+        self.scrollbar.grid(row=0, column=1)
+        self.listbox.config(yscrollcommand=self.scrollbar.set)  
+        self.scrollbar.config(command=self.listbox.yview)
         # Ajout de bouttons
-
+        self.creer_sorcier_bouton = Button(self.frame1, text="Créer un sorcier", height=4, width=26)
+        self.creer_sorcier_bouton.bind('<ButtonRelease>', self.btnSorcier_Click)
+        self.creer_guerrier_bouton = Button(self.frame1, text="Créer un guerrier", height=4, width=26)
+        self.creer_guerrier_bouton.bind('<ButtonRelease>', self.btnGuerrier_Click)
+        self.attaquer_bouton = Button(self.frame1, text="Attaquer", height=4, width=26)
+        self.attaquer_bouton.bind('<ButtonRelease>', self.btnAttaquer_Click)
+        self.redonner_energie_bouton = Button(self.frame1, text="Réinitialiser l'Énergie", height=4, width=26)
+        self.redonner_energie_bouton.bind('<ButtonRelease>', self.btnRedonnerEnergie_Click)
+        self.crier_bouton = Button(self.frame1, text="Crier", height=4, width=26)
+        self.crier_bouton.bind('<ButtonRelease>', self.btnCrier_Click)
+        
+        self.creer_sorcier_bouton.grid(row=0, column=0, sticky=N, pady=4, padx=1)
+        self.creer_guerrier_bouton.grid(row=1, column=0, sticky=N, pady=4, padx=1)
+        self.attaquer_bouton.grid(row=2, column=0, sticky=N, pady=4, padx=1)
+        self.redonner_energie_bouton.grid(row=3, column=0, sticky=N, pady=4, padx=1)
+        self.crier_bouton.grid(row=4, column=0, sticky=N, pady=4, padx=1)
 
     def listIsEmpty(self):
         try:
