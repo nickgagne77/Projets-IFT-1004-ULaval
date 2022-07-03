@@ -1,8 +1,6 @@
 from tkinter import *
 from tkinter.filedialog import *
 
-from sqlalchemy import column
-
 from gestion_personnages import GestionPersonnages
 
 
