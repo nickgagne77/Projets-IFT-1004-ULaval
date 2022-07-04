@@ -23,7 +23,7 @@ class Sorcier(Personnage):
         self.nbr_charmes_defaut = 20
         self.nbr_charmes_max = 20
         self.nbr_charmes = 0
-        self.energie_courante = energie_courante
+        self.energie = energie_courante
         self.nbr_charmes = nbr_charmes
 
 
@@ -33,7 +33,7 @@ class Sorcier(Personnage):
         valeur du nombre de charmes, charmes."
         Returns (str): La chaîne représentant le Sorcier.
         """
-        return "Le sorcier {} a une énergie de {} et {} charmes.".format(self.nom, self.energie_courante, self.nbr_charmes)
+        return "Le sorcier {} a une énergie de {} et {} charmes.".format(self.nom, self.energie, self.nbr_charmes)
 
     def valider_nbr_charmes(self, nb_charmes):
         """
@@ -59,10 +59,10 @@ class Sorcier(Personnage):
         Args:
             force_attaque (int): La force de l'attaque 
         """
-        if force_attaque >= self.energie_courante:
-            self.energie_courante = 0
+        if force_attaque >= self.energie:
+            self.energie = 0
         else:
-            self.energie_courante -= force_attaque
+            self.energie -= force_attaque
 
     def get_nbr_charmes(self):
         """
@@ -85,6 +85,7 @@ class Sorcier(Personnage):
             return True
         else:
             return False
+
 
 if __name__ == '__main__':
     sorc1 = Sorcier("John", 10, 20, 30)
@@ -109,14 +110,14 @@ if __name__ == '__main__':
     assert sorc1.crier() == "Je vais tous vous anéantir!"
 
     sorc1.attaquer(5)
-    assert sorc1.energie_courante == 15
+    assert sorc1.energie == 15
 
     sorc1.attaquer(-5)
-    assert sorc1.energie_courante == 20
+    assert sorc1.energie == 20
 
-    sorc1.attaquer(sorc1.energie_courante)
-    assert sorc1.energie_courante == 0
+    sorc1.attaquer(sorc1.energie)
+    assert sorc1.energie == 0
 
-    assert sorc1.to_string() == "Le sorcier John a une énergie de 0 et 10 charmes"
+    assert sorc1.to_string() == "Le sorcier John a une énergie de 0 et 10 charmes."
 
     print("Tests réussis!")
