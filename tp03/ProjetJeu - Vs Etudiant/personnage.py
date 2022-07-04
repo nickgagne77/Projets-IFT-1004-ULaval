@@ -239,3 +239,4 @@ if __name__ == '__main__':
     assert pers3.to_string() == "Larry a une énergie de 0"
     print("Tests réussis!")
     
+    
