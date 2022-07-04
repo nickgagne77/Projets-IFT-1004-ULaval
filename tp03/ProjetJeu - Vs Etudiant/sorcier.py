@@ -33,7 +33,7 @@ class Sorcier(Personnage):
         valeur du nombre de charmes, charmes."
         Returns (str): La chaîne représentant le Sorcier.
         """
-        return "Le sorcier {} a une énergie de {} et {} charmes".format(self.nom, self.energie_courante, self.nbr_charmes)
+        return "Le sorcier {} a une énergie de {} et {} charmes.".format(self.nom, self.energie_courante, self.nbr_charmes)
 
     def valider_nbr_charmes(self, nb_charmes):
         """
