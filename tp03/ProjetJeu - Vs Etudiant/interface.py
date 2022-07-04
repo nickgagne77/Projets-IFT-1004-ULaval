@@ -1,8 +1,6 @@
 from tkinter import *
 from tkinter.filedialog import *
 
-from click import command
-
 from gestion_personnages import GestionPersonnages
 
 
