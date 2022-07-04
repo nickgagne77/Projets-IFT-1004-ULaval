@@ -2,7 +2,7 @@ from tkinter.filedialog import *
 from tkinter import simpledialog
 from sorcier import Sorcier
 from guerrier import Guerrier
-
+import sys
  
 class Util:
     """
@@ -24,10 +24,22 @@ class Util:
 
         """
         try:
+            f = open(fichier, 'r')
+            liste_lignes = f.readlines()
+            f.close()
+        except FileNotFoundError:
+            return False
+        
+        try:
             pass
         except Exception:
             print(sys.stderr, "erreur d'execution dans gestionOuvrir")
             sys.exit(1)
+            return False
+        
+        for ligne in liste_lignes:
+            liste_personnages.append(ligne.rstrip('\n').split(';'))
+        return True
 
 
     @staticmethod
@@ -36,10 +48,19 @@ class Util:
         Permet d’écrire la liste de personnages reçue en paramètre dans le fichier de personnages aussi reçu en entrée.
         Pour plus de détails, voir l'énoncé du travail.
         Args:
-            fichier: 
-            liste_personnages: 
+            fichier: fichier texte à écrire pour stocker les personnages
+            liste_personnages: Liste de personnages à écrire dans le fichier
         """
-        pass
+        try:
+            f = open(fichier, 'w')
+        except FileNotFoundError:
+            return False
+        
+        for ligne in liste_personnages:
+            f.write(';'.join(map(str, ligne)))
+            f.write('\n')
+        f.close()
+        return True
 
     @staticmethod
     def saisir_objet_entier(question):
@@ -90,3 +111,4 @@ class Util:
                 valide = True
 
         return string_temp
+

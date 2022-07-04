@@ -34,6 +34,10 @@ class GestionPersonnages:
         
         Return (Sorcier): Le sorcier instancié si la création a réussie, None sinon.
         """
+        type = Util().TYPE_SORCIER
+        nom = Util().saisir_string("Saisir le nom du Sorcier: ")
+        # TODO, valider si nom valide avec classe Personnage ou Sorcier
+        
 
     def gestion_creer_guerrier(self):
         """

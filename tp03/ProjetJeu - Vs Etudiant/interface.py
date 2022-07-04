@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter.filedialog import *
 
+from click import command
+
 from gestion_personnages import GestionPersonnages
 
 
@@ -22,6 +24,10 @@ class Interface(Frame):
         menu = Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label="Fichier", menu=menu)
         menu.add_command(label="Ouvrir...", command=self.menuOuvrir_Click)
+        menu.add_command(label="Enregistrer", command=self.menuEnregistrer_Click)
+        menu.add_command(label="Enregistrer sous...", command=self.menuEnregistrerSous_Click)
+        menu.add_command(label="Vider liste", command=self.menuViderListe_Click)
+        menu.add_command(label="Quitter", command=self.menuQuitter_Click)
        #ajouter les autres options
 
 
@@ -43,6 +49,7 @@ class Interface(Frame):
         self.scrollbar.grid(row=0, column=1)
         self.listbox.config(yscrollcommand=self.scrollbar.set)  
         self.scrollbar.config(command=self.listbox.yview)
+        self.listbox.bind('<Button-1>', self.listbox_Click)
         # Ajout de bouttons
         self.creer_sorcier_bouton = Button(self.frame1, text="Créer un sorcier", height=4, width=26)
         self.creer_sorcier_bouton.bind('<ButtonRelease>', self.btnSorcier_Click)
