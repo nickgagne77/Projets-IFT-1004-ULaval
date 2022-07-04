@@ -1,4 +1,7 @@
-class Sorcier( ):
+from personnage import Personnage
+
+
+class Sorcier(Personnage):
     """ 
     Classe représentant un Sorcier. Hérite de Personnage.
     Attributes:
@@ -6,16 +9,23 @@ class Sorcier( ):
         nb_charmes_max (int): Le nombre de charmes maximum
         nb_charmes (int): Le nombre de charmes courant
     """
-    def __init__(self, nom, energie_depart, energie, nbr_charmes):
+    def __init__(self, nom, energie_depart, energie_courante, nbr_charmes):
         """
         Le constructeur du Sorcier. Il doit initialiser le nom, l’énergie de départ, l’énergie courante et
-        le nombre de charmes. NB : pensez à optimiser votre code et utiliser le constructeur de la classe parente.
+        le nombre de charmes. NB: pensez à optimiser votre code et utiliser le constructeur de la classe parente.
         Args:
             nom: Le nom du sorcier
             energie_depart:  L'énergie de départ du sorcier
-            energie: L'énergie courante du sorcier
+            energie_courante: L'énergie courante du sorcier
             nbr_charmes:  Le nombre de charmes du sorcier
         """
+        super().__init__(nom, energie_depart)
+        self.nbr_charmes_defaut = 20
+        self.nbr_charmes_max = 20
+        self.nbr_charmes = 0
+        self.energie_courante = energie_courante
+        self.nbr_charmes = nbr_charmes
+
 
     def to_string(self):
         """
@@ -23,6 +33,7 @@ class Sorcier( ):
         valeur du nombre de charmes, charmes."
         Returns (str): La chaîne représentant le Sorcier.
         """
+        return "Le sorcier {} a une énergie de {} et {} charmes".format(self.nom, self.energie_courante, self.nbr_charmes)
 
     def valider_nbr_charmes(self, nb_charmes):
         """
@@ -32,12 +43,14 @@ class Sorcier( ):
 
         Returns (bool): True si le nombre de charmes est valide, false sinon.
         """
+        return nb_charmes >= 0 and nb_charmes < self.nbr_charmes_max
 
     def crier(self):
         """
         Retourne le cri du sorcier: "Je vais tous vous anéantir!"
         Returns: Le cri du sorcier
         """
+        return "Je vais tous vous anéantir!"
 
     def attaquer(self, force_attaque):
         """
@@ -46,6 +59,10 @@ class Sorcier( ):
         Args:
             force_attaque (int): La force de l'attaque 
         """
+        if force_attaque >= self.energie_courante:
+            self.energie_courante = 0
+        else:
+            self.energie_courante -= force_attaque
 
     def get_nbr_charmes(self):
         """
@@ -53,6 +70,7 @@ class Sorcier( ):
         Returns (int): Le nombre de charmes du sorcier.
 
         """
+        return self.nbr_charmes
 
     def set_nbr_charmes(self, nb_charmes):
         """
@@ -62,3 +80,43 @@ class Sorcier( ):
 
         Returns (bool): True si le nombre de charmes est valide et a été modifié, False sinon.
         """
+        if self.valider_nbr_charmes(nb_charmes):
+            self.nbr_charmes = nb_charmes
+            return True
+        else:
+            return False
+
+if __name__ == '__main__':
+    sorc1 = Sorcier("John", 10, 20, 30)
+    sorc2 = Sorcier("Yu", 50, 100, 21)
+    sorc3 = Sorcier("Larry", 25, 15, -1)
+    print()
+    print("Tests unitaires en cours...")
+    print()
+
+    assert not sorc1.set_nbr_charmes(21)
+    sorc1.set_nbr_charmes(10)
+    assert sorc1.nbr_charmes == 10
+    assert sorc1.get_nbr_charmes() == 10
+
+
+    assert sorc1.valider_nbr_charmes(sorc1.nbr_charmes)
+    assert not sorc2.valider_nbr_charmes(sorc2.nbr_charmes)
+    assert not sorc3.valider_nbr_charmes(sorc3.nbr_charmes)
+
+    assert sorc2.get_nbr_charmes() == 21
+
+    assert sorc1.crier() == "Je vais tous vous anéantir!"
+
+    sorc1.attaquer(5)
+    assert sorc1.energie_courante == 15
+
+    sorc1.attaquer(-5)
+    assert sorc1.energie_courante == 20
+
+    sorc1.attaquer(sorc1.energie_courante)
+    assert sorc1.energie_courante == 0
+
+    assert sorc1.to_string() == "Le sorcier John a une énergie de 0 et 10 charmes"
+
+    print("Tests réussis!")
