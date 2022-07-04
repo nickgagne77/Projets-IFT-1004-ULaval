@@ -12,6 +12,10 @@ class GestionPersonnages:
         liste_personnages (list): La liste des personnages
         fichier_courant (str): Le nom du fichier courant
     """
+    def __init__(self):
+        self.liste_personnages = []
+        self.fichier_courant = ""
+    
     def mettre_a_jour_liste(self):
         """
         Mets à jour et trie la liste des personnages par rapport à l'énergie courante. 
