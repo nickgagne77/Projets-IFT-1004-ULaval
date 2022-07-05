@@ -64,7 +64,7 @@ class GestionPersonnages:
         energie_depart = Util.saisir_objet_entier("Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
         charmes = Util.saisir_objet_entier("Donnez la valeur de charmes? (une valeur positive plus petite que 21)")
         sorcier = Sorcier(nom, energie_depart, energie_depart, charmes)
-        if sorcier.valider_energie_depart(sorcier.energie_depart) and sorcier.valider_nom(sorcier.nbr_charmes) and sorcier.valider_nom(sorcier.nom):
+        if sorcier.valider_energie_depart(sorcier.energie_depart) and sorcier.valider_nbr_charmes(sorcier.nbr_charmes) and sorcier.valider_nom(sorcier.nom):
             return sorcier
         else:
             None
@@ -96,7 +96,7 @@ class GestionPersonnages:
         energie_depart = Util.saisir_objet_entier("Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
         forces = Util.saisir_objet_entier("Donnez la valeur de la force? (une valeur positive plus petite que 81)")
         guerrier = Guerrier(nom, energie_depart, energie_depart, forces)
-        if guerrier.valider_energie_depart(guerrier.energie_depart) and guerrier.valider_nom(guerrier.force) and guerrier.valider_nom(guerrier.nom):
+        if guerrier.valider_energie_depart(guerrier.energie_depart) and guerrier.valider_force(guerrier.force) and guerrier.valider_nom(guerrier.nom):
             return guerrier
         else:
             None

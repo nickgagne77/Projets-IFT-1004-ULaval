@@ -128,7 +128,7 @@ class Interface(Frame):
 
 
 
-    def btnSorcier_Click(self):
+    def btnSorcier_Click(self, event):
         self.gp.gestion_creer_sorcier()
         personnages = self.gp.mettre_a_jour_liste()
 
@@ -136,7 +136,7 @@ class Interface(Frame):
         if personnages:
             self.updateList(personnages)
 
-    def btnGuerrier_Click(self):
+    def btnGuerrier_Click(self, event):
         self.gp.gestion_creer_guerrier()
         personnages = self.gp.mettre_a_jour_liste()
 
@@ -145,7 +145,7 @@ class Interface(Frame):
             self.updateList(personnages)
 
 
-    def btnAttaquer_Click(self):
+    def btnAttaquer_Click(self, event):
         self.gp.gestion_attaquer(self.pIndex)
         row = self.pIndex
         personnages = self.gp.mettre_a_jour_liste()
@@ -159,7 +159,7 @@ class Interface(Frame):
         self.listbox.event_generate("<<ListboxSelect>>")
 
 
-    def btnRedonnerEnergie_Click(self):
+    def btnRedonnerEnergie_Click(self, event):
         self.gp.gestion_augmenter_energie(self.pIndex)
         row = self.pIndex
         personnages = self.gp.mettre_a_jour_liste()
@@ -171,7 +171,7 @@ class Interface(Frame):
         self.listbox.select_set(row)
         self.listbox.event_generate("<<ListboxSelect>>")
 
-    def btnCrier_Click(self):
+    def btnCrier_Click(self, event):
         self.gp.gestion_crier(self.pIndex)
         row = self.pIndex
 
