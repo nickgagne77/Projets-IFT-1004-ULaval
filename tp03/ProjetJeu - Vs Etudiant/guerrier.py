@@ -49,7 +49,7 @@ class Guerrier(Personnage):
 
         Returns (bool): True si la force est valide, False sinon
         """
-        return 0 <= force < self.force_max
+        return 0 <= force <= self.force_max
 
     def crier(self):
         """
