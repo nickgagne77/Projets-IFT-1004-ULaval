@@ -43,7 +43,7 @@ class Sorcier(Personnage):
 
         Returns (bool): True si le nombre de charmes est valide, false sinon.
         """
-        return nb_charmes >= 0 and nb_charmes < self.nbr_charmes_max
+        return nb_charmes >= 0 and nb_charmes <= self.nbr_charmes_max
 
     def crier(self):
         """
