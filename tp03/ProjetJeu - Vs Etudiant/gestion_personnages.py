@@ -23,21 +23,20 @@ class GestionPersonnages:
         Returns (list str): La liste triée des chaînes de caractères des personnages
 
         """
-        x = self.liste_personnages
-        n = len(x)
+        n = len(self.liste_personnages)
 
         # Parcourir toute la liste
         for i in range(n):
             for j in range(0, n-i-1):
 
                 # Remplacer element courant si est plus grand que le prochain
-                if x[j].energie_courante > x[j+1].energie_courante:
-                    x[j], x[j+1] = x[j+1], x[j]
-        liste_str = []
-        for objet in x:
-            liste_str.append(objet.to_string())
+                if self.liste_personnages[j].energie_courante > self.liste_personnages[j+1].energie_courante:
+                    self.liste_personnages[j], self.liste_personnages[j+1] = self.liste_personnages[j+1],self.liste_personnages[j]
+        liste_ordonnee_str = []
+        for objet in self.liste_personnages:
+            liste_ordonnee_str.append(objet.to_string())
             
-        return liste_str
+        return liste_ordonnee_str
 
     def gestion_creer_sorcier(self):
         """
