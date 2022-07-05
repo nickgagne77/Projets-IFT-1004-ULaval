@@ -50,15 +50,15 @@ class Interface(Frame):
         self.listbox.bind('<Button-1>', self.listbox_Click)
         # Ajout de bouttons
         self.creer_sorcier_bouton = Button(self.frame1, text="Créer un sorcier", height=4, width=26)
-        self.creer_sorcier_bouton.bind('<ButtonRelease>', self.btnSorcier_Click)
+        self.creer_sorcier_bouton.bind('<Button-1>', self.btnSorcier_Click)
         self.creer_guerrier_bouton = Button(self.frame1, text="Créer un guerrier", height=4, width=26)
-        self.creer_guerrier_bouton.bind('<ButtonRelease>', self.btnGuerrier_Click)
+        self.creer_guerrier_bouton.bind('<Button-1>', self.btnGuerrier_Click)
         self.attaquer_bouton = Button(self.frame1, text="Attaquer", height=4, width=26)
-        self.attaquer_bouton.bind('<ButtonRelease>', self.btnAttaquer_Click)
+        self.attaquer_bouton.bind('<Button-1>', self.btnAttaquer_Click)
         self.redonner_energie_bouton = Button(self.frame1, text="Réinitialiser l'Énergie", height=4, width=26)
-        self.redonner_energie_bouton.bind('<ButtonRelease>', self.btnRedonnerEnergie_Click)
+        self.redonner_energie_bouton.bind('<Button-1>', self.btnRedonnerEnergie_Click)
         self.crier_bouton = Button(self.frame1, text="Crier", height=4, width=26)
-        self.crier_bouton.bind('<ButtonRelease>', self.btnCrier_Click)
+        self.crier_bouton.bind('<Button-1>', self.btnCrier_Click)
         
         self.creer_sorcier_bouton.grid(row=0, column=0, sticky=N, pady=4, padx=1)
         self.creer_guerrier_bouton.grid(row=1, column=0, sticky=N, pady=4, padx=1)
@@ -102,8 +102,8 @@ class Interface(Frame):
 
 
     def menuOuvrir_Click(self):
-        self.gp.gestionOuvrir()
-        personnages = self.gp.mettreAJourListe()
+        self.gp.gestion_ouvrir()
+        personnages = self.gp.mettre_a_jour_liste()
 
         # Update listview
         if personnages:
@@ -111,34 +111,34 @@ class Interface(Frame):
 
 
     def menuEnregistrer_Click(self):
-        self.gp.gestionEnregistrer()
+        self.gp.gestion_enregistrer()
 
     def menuEnregistrerSous_Click(self):
-        self.gp.gestionEnregistrerSous()
+        self.gp.gestion_enregistrer_sous()
 
 
     def menuViderListe_Click(self):
-        self.gp.gestionViderListe()
+        self.gp.gestion_vider_liste()
         self.listbox.delete(0, END)
             #quit()
 
     def menuQuitter_Click(self):
-        if self.gp.gestionQuitter():
+        if self.gp.gestion_quitter():
             quit()
 
 
 
     def btnSorcier_Click(self):
-        self.gp.gestionCreerSorcier()
-        personnages = self.gp.mettreAJourListe()
+        self.gp.gestion_creer_sorcier()
+        personnages = self.gp.mettre_a_jour_liste()
 
         # Update listview
         if personnages:
             self.updateList(personnages)
 
     def btnGuerrier_Click(self):
-        self.gp.gestionCreerGuerrier()
-        personnages = self.gp.mettreAJourListe()
+        self.gp.gestion_creer_guerrier()
+        personnages = self.gp.mettre_a_jour_liste()
 
         # Update listview
         if personnages:
@@ -146,9 +146,9 @@ class Interface(Frame):
 
 
     def btnAttaquer_Click(self):
-        self.gp.gestionAttaquer(self.pIndex)
+        self.gp.gestion_attaquer(self.pIndex)
         row = self.pIndex
-        personnages = self.gp.mettreAJourListe()
+        personnages = self.gp.mettre_a_jour_liste()
 
         # Update listview
         if personnages:
@@ -160,9 +160,9 @@ class Interface(Frame):
 
 
     def btnRedonnerEnergie_Click(self):
-        self.gp.gestionAugmenterEnergie(self.pIndex)
+        self.gp.gestion_augmenter_energie(self.pIndex)
         row = self.pIndex
-        personnages = self.gp.mettreAJourListe()
+        personnages = self.gp.mettre_a_jour_liste()
 
         # Update listview
         self.updateList(personnages)
@@ -172,7 +172,7 @@ class Interface(Frame):
         self.listbox.event_generate("<<ListboxSelect>>")
 
     def btnCrier_Click(self):
-        self.gp.gestionCrier(self.pIndex)
+        self.gp.gestion_crier(self.pIndex)
         row = self.pIndex
 
         #Garder le focus sur la meme ligne
@@ -185,7 +185,7 @@ def main():
     root = Tk()
     root.geometry("700x400+300+100")
     app = Interface(root)
-    root.mainloop()
+    app.mainloop()
 
 
 

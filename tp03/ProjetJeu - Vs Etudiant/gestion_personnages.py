@@ -1,5 +1,7 @@
 from tkinter.filedialog import *
 from tkinter import messagebox
+
+from numpy import isin
 from util import Util
 from personnage import Personnage
 from sorcier import Sorcier
@@ -12,9 +14,8 @@ class GestionPersonnages:
         liste_personnages (list): La liste des personnages
         fichier_courant (str): Le nom du fichier courant
     """
-    def __init__(self):
-        self.liste_personnages = []
-        self.fichier_courant = ""
+    liste_personnages = []
+    fichier_courant = None
     
     def mettre_a_jour_liste(self):
         """
@@ -22,6 +23,7 @@ class GestionPersonnages:
         Returns (list str): La liste triée des chaînes de caractères des personnages
 
         """
+        return self.liste_personnages.sort(key=self.get_energie_courante) #TODO, PAS SUR DE CETTE LIGNE
 
     def gestion_creer_sorcier(self):
         """
@@ -29,6 +31,13 @@ class GestionPersonnages:
         sont valides, on ajoute le sorcier à la liste (méthode ajouter_personnage) et on affiche le message approprié.  
         Sinon, on affiche seulement que le sorcier n’a pas été ajouté.
         """
+        personnage = self.saisir_et_creer_sorcier()
+        if personnage is not None:
+            self.ajouter_personnage(personnage)
+            messagebox.showinfo("Ajout d'un Sorcier", message="Le nouveau Sorcier a été ajouté à la liste")
+        else:
+            messagebox.showerror("Erreur", "Le Sorcier n'a pas été ajouté.")
+
 
     def saisir_et_creer_sorcier(self):
         """
@@ -38,9 +47,14 @@ class GestionPersonnages:
         
         Return (Sorcier): Le sorcier instancié si la création a réussie, None sinon.
         """
-        type = Util().TYPE_SORCIER
-        nom = Util().saisir_string("Saisir le nom du Sorcier: ")
-        # TODO, valider si nom valide avec classe Personnage ou Sorcier
+        nom = Util.saisir_string("Saisir le nom du Sorcier? (Entre 3 et 30)")
+        energie_depart = Util.saisir_objet_entier("Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
+        charmes = Util.saisir_objet_entier("Donnez la valeur de charmes? (une valeur positive plus petite que 21)")
+        sorcier = Sorcier(nom, energie_depart, energie_depart, charmes)
+        if sorcier.valider_energie_depart(sorcier.energie_depart) and sorcier.valider_nom(sorcier.nbr_charmes) and sorcier.valider_nom(sorcier.nom):
+            return sorcier
+        else:
+            None
         
 
     def gestion_creer_guerrier(self):
@@ -49,6 +63,13 @@ class GestionPersonnages:
         sont valides, on ajoute le sorcier à la liste (méthode ajouter_personnage) et on affiche le message approprié.  
         Sinon, on affiche seulement que le sorcier n’a pas été ajouté.
         """
+        personnage = self.saisir_et_creer_guerrier()
+        if personnage is not None:
+            self.ajouter_personnage(personnage)
+            messagebox.showinfo("Ajout d'un Guerrier", message="Le nouveau Guerrier a été ajouté à la liste")
+        else:
+            messagebox.showerror("Erreur", "Le Guerrier n'a pas été ajouté.")
+
 
     def saisir_et_creer_guerrier(self):
         """
@@ -58,6 +79,14 @@ class GestionPersonnages:
         
         Returns (Guerrier): Le guerrier instancié si la création a réussie, None sinon.
         """
+        nom = Util.saisir_string("Saisir le nom du Guerrier (entre 3 et 30): ")
+        energie_depart = Util.saisir_objet_entier("Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
+        forces = Util.saisir_objet_entier("Donnez la valeur de la force? (une valeur positive plus petite que 81)")
+        guerrier = Guerrier(nom, energie_depart, energie_depart, forces)
+        if guerrier.valider_energie_depart(guerrier.energie_depart) and guerrier.valider_nom(guerrier.force) and guerrier.valider_nom(guerrier.nom):
+            return guerrier
+        else:
+            None
 
     def ajouter_personnage(self, personnage):
         """
@@ -65,6 +94,7 @@ class GestionPersonnages:
         Args:
             personnage (Personnage): Le personnage à ajouter. 
         """
+        self.liste_personnages.append(personnage)
 
 
     def gestion_attaquer(self, index):
@@ -98,6 +128,17 @@ class GestionPersonnages:
         Args:
             index (int): L'indice du personnage sélectionné ou -1 si aucun n'est sélectionné. 
         """
+        if index != -1:
+            personnage = self.liste_personnages[index]
+        else:
+            messagebox.showinfo("Erreur", message="Il n'y a aucun personnage sélectionné.")
+        if not personnage.est_mort():
+            if isinstance(personnage, Sorcier):
+                messagebox.showinfo("Cri du personnage", message="Je vais tous vous anéantir!")
+            elif isinstance(personnage, Guerrier):
+                messagebox.showinfo("Cri du personnage", message="Vous allez goûter à la puissance de mon épée!")
+        else:
+            messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
 
 
     def gestion_ouvrir(self):

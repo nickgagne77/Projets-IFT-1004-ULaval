@@ -4,6 +4,8 @@ from sorcier import Sorcier
 from guerrier import Guerrier
 import sys
  
+class MauvaisFormatException(Exception):
+    pass
 class Util:
     """
     Classe utilitaire comportant uniquement des méthodes statiques.
@@ -27,7 +29,12 @@ class Util:
             f = open(fichier, 'r')
             liste_lignes = f.readlines()
             f.close()
+            for ligne in liste_lignes:
+                if ligne.count(';') < 4:
+                    raise MauvaisFormatException
         except FileNotFoundError:
+            return False
+        except MauvaisFormatException:
             return False
         
         try:
@@ -36,9 +43,13 @@ class Util:
             print(sys.stderr, "erreur d'execution dans gestionOuvrir")
             sys.exit(1)
             return False
-        
+        ligne_tmp = []
         for ligne in liste_lignes:
-            liste_personnages.append(ligne.rstrip('\n').split(';'))
+            ligne_tmp = (ligne.rstrip('\n').split(';'))
+            if ligne_tmp[0] == "Sorcier":
+                liste_personnages.append(Sorcier(ligne_tmp[1], ligne_tmp[2], ligne_tmp[3], ligne_tmp[4]))
+            else:
+                liste_personnages.append(Guerrier(ligne_tmp[1], ligne_tmp[2], ligne_tmp[3], ligne_tmp[4]))
         return True
 
 
@@ -56,9 +67,14 @@ class Util:
         except FileNotFoundError:
             return False
         
+        chaine = "{};{};{};{};{}"
         for ligne in liste_personnages:
-            f.write(';'.join(map(str, ligne)))
-            f.write('\n')
+            if isinstance(ligne, Sorcier):
+                f.write(chaine.format("Sorcier", ligne.nom, ligne.energie_depart, ligne.energie_courante, ligne.nbr_charmes))
+                f.write('\n')
+            elif isinstance(ligne, Guerrier):
+                f.write(chaine.format("Guerrier", ligne.nom, ligne.energie_depart, ligne.energie_courante, ligne.force))
+                f.write('\n')
         f.close()
         return True
 
