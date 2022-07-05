@@ -1,7 +1,6 @@
 from tkinter.filedialog import *
 from tkinter import messagebox
 
-from numpy import isin
 from util import Util
 from personnage import Personnage
 from sorcier import Sorcier
@@ -14,8 +13,9 @@ class GestionPersonnages:
         liste_personnages (list): La liste des personnages
         fichier_courant (str): Le nom du fichier courant
     """
-    liste_personnages = []
-    fichier_courant = None
+    def __init__(self, liste_personnages = [], fichier_courant = None):
+        self.liste_personnages = liste_personnages
+        self.fichier_courant = fichier_courant
     
     def mettre_a_jour_liste(self):
         """
