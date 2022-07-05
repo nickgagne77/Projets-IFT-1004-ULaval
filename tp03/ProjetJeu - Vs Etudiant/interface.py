@@ -65,6 +65,8 @@ class Interface(Frame):
         self.attaquer_bouton.grid(row=2, column=0, sticky=N, pady=4, padx=1)
         self.redonner_energie_bouton.grid(row=3, column=0, sticky=N, pady=4, padx=1)
         self.crier_bouton.grid(row=4, column=0, sticky=N, pady=4, padx=1)
+        
+        # TODO, faire en sorte que les boutons se replace apres un clic
 
     def listIsEmpty(self):
         try:
@@ -91,14 +93,17 @@ class Interface(Frame):
     #Permet d'identifier le personnage selectionné (set pIndex)
     def listbox_Click(self, event):
         widget = event.widget
-        selection=widget.curselection()
-        value = widget.get(selection[0])
-        index = widget.curselection()[0]
-
+        #selection=widget.curselection()
+        try:
+            index = widget.curselection()[0]
+        except IndexError:
+            index = 0
+        
+        #value = widget.get(selection[0])
         #print ("selection:", selection, ": '%s'" % value)
 
         self.pIndex = index
-        #print(gp.getPersonnage(index))
+        print(self.gp.get_personnage(index))
 
 
     def menuOuvrir_Click(self):

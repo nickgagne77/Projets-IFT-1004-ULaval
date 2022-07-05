@@ -199,3 +199,6 @@ class GestionPersonnages:
         """
         Permet de quitter l'application après confirmation de l'utilisateur.
         """
+    
+    def get_personnage(self, index):
+        return self.liste_personnages[index]
