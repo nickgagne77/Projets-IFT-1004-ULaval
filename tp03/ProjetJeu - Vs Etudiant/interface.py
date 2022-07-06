@@ -15,7 +15,7 @@ class Interface(Frame):
 
     def initUI(self):
         self.parent.title("Personnages : Un exemple d'héritage et de polymorphisme")
-        self.pack(fill=BOTH, expand=True)
+        self.pack(side=TOP, fill=BOTH, expand=True)
 
         self.menubar = Menu(self)
 
@@ -26,8 +26,7 @@ class Interface(Frame):
         menu.add_command(label="Enregistrer sous...", command=self.menuEnregistrerSous_Click)
         menu.add_command(label="Vider liste", command=self.menuViderListe_Click)
         menu.add_command(label="Quitter", command=self.menuQuitter_Click)
-       #ajouter les autres options
-
+        # ajouter les autres options
 
         self.master.config(menu=self.menubar)
 
@@ -38,14 +37,13 @@ class Interface(Frame):
         self.frame2 = Frame(self)
         self.frame2.grid(row=0, column=0)
         # Ajout de labels dans les frames
-        
 
         # Ajout du listbox
         self.scrollbar = Scrollbar(self.frame2, orient="vertical")
-        self.listbox = Listbox(self.frame2, height= 25, width=80)
+        self.listbox = Listbox(self.frame2, height=25, width=80)
         self.listbox.grid(row=0, column=0)
         self.scrollbar.grid(row=0, column=1)
-        self.listbox.config(yscrollcommand=self.scrollbar.set)  
+        self.listbox.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.listbox.yview)
         self.listbox.bind("<<ListboxSelect>>", self.listbox_Click)
         self.var = IntVar()
@@ -60,13 +58,13 @@ class Interface(Frame):
         self.redonner_energie_bouton.bind('<Button-1>', self.btnRedonnerEnergie_Click)
         self.crier_bouton = Button(self.frame1, text="Crier", height=4, width=26)
         self.crier_bouton.bind('<Button-1>', self.btnCrier_Click)
-        
+
         self.creer_sorcier_bouton.grid(row=0, column=0, sticky=N, pady=4, padx=1)
         self.creer_guerrier_bouton.grid(row=1, column=0, sticky=N, pady=4, padx=1)
         self.attaquer_bouton.grid(row=2, column=0, sticky=N, pady=4, padx=1)
         self.redonner_energie_bouton.grid(row=3, column=0, sticky=N, pady=4, padx=1)
         self.crier_bouton.grid(row=4, column=0, sticky=N, pady=4, padx=1)
-        
+
         # TODO, faire en sorte que les boutons se replace apres un clic
 
     def listIsEmpty(self):
@@ -77,12 +75,11 @@ class Interface(Frame):
 
         return False
 
-    #Ajoute un personnage dans la listbox
+    # Ajoute un personnage dans la listbox
     def appendList(self, personnage):
         self.listbox.insert(END, personnage)
 
-
-    #Remplace tous les personnages de la listbox par une nouvelle liste
+    # Remplace tous les personnages de la listbox par une nouvelle liste
     def updateList(self, personnages):
         self.listbox.delete(0, END)
 
@@ -91,18 +88,16 @@ class Interface(Frame):
 
         self.pIndex = -1
 
-    #Permet d'identifier le personnage selectionné (set pIndex)
+    # Permet d'identifier le personnage selectionné (set pIndex)
     def listbox_Click(self, event):
         widget = event.widget
-        #selection=widget.curselection()
+        # selection=widget.curselection()
         index = widget.curselection()[0]
         self.pIndex = index
         print(self.gp.get_personnage(index))
 
-        
-        #value = widget.get(selection[0])
-        #print ("selection:", selection, ": '%s'" % value)
-
+        # value = widget.get(selection[0])
+        # print ("selection:", selection, ": '%s'" % value)
 
     def menuOuvrir_Click(self):
         self.gp.gestion_ouvrir()
@@ -112,24 +107,20 @@ class Interface(Frame):
         if personnages:
             self.updateList(personnages)
 
-
     def menuEnregistrer_Click(self):
         self.gp.gestion_enregistrer()
 
     def menuEnregistrerSous_Click(self):
         self.gp.gestion_enregistrer_sous()
 
-
     def menuViderListe_Click(self):
         self.gp.gestion_vider_liste()
         self.listbox.delete(0, END)
-            #quit()
+        # quit()
 
     def menuQuitter_Click(self):
         if self.gp.gestion_quitter():
             quit()
-
-
 
     def btnSorcier_Click(self, event):
         self.gp.gestion_creer_sorcier()
@@ -147,7 +138,6 @@ class Interface(Frame):
         if personnages:
             self.updateList(personnages)
 
-
     def btnAttaquer_Click(self, event):
         self.gp.gestion_attaquer(self.pIndex)
         row = self.pIndex
@@ -157,10 +147,9 @@ class Interface(Frame):
         if personnages:
             self.updateList(personnages)
 
-        #Garder le focus sur la meme ligne
+        # Garder le focus sur la meme ligne
         self.listbox.select_set(row)
         self.listbox.event_generate("<<ListboxSelect>>")
-
 
     def btnRedonnerEnergie_Click(self, event):
         self.gp.gestion_augmenter_energie(self.pIndex)
@@ -170,7 +159,7 @@ class Interface(Frame):
         # Update listview
         self.updateList(personnages)
 
-        #Garder le focus sur la meme ligne
+        # Garder le focus sur la meme ligne
         self.listbox.select_set(row)
         self.listbox.event_generate("<<ListboxSelect>>")
 
@@ -178,20 +167,17 @@ class Interface(Frame):
         self.gp.gestion_crier(self.pIndex)
         row = self.pIndex
 
-        #Garder le focus sur la meme ligne
+        # Garder le focus sur la meme ligne
         self.listbox.select_set(row)
         self.listbox.event_generate("<<ListboxSelect>>")
 
 
-
 def main():
     root = Tk()
-    root.geometry("700x400+300+100")
+    root.geometry("1010x420+300+100")
     app = Interface(root)
     app.mainloop()
 
 
-
 if __name__ == '__main__':
     main()
-    
