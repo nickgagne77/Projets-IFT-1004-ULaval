@@ -155,14 +155,13 @@ class GestionPersonnages:
             index (int): L'indice du personnage sélectionné ou -1 si aucun n'est sélectionné. 
         """
         if index != -1:
-            personnage = self.liste_personnages[index]
+            if not personnage.est_mort():
+                personnage = self.liste_personnages[index]
+                messagebox.showinfo("Cri du personnage", message=personnage.crier())
+            else:
+                messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
         else:
             messagebox.showinfo("Erreur", message="Il n'y a aucun personnage sélectionné.")
-        if not personnage.est_mort():
-            messagebox.showinfo("Cri du personnage", message=personnage.crier())
-        else:
-            messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
-
 
     def gestion_ouvrir(self):
         """
