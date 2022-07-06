@@ -178,12 +178,14 @@ if __name__ == '__main__':
     pers1 = Personnage("John", 80)
     pers2 = Personnage("Yu", 50)
     pers3 = Personnage("Larry", 150)
+    pers4 = Personnage("Hello My name is Anakin Skywalerker", 1)
     print()
     print("Tests unitaires en cours...")
     print()
     assert pers1.valider_nom(pers1.nom)
     assert not pers2.valider_nom(pers2.nom)
     assert pers3.valider_nom(pers3.nom)
+    assert not pers4.valider_nom(pers4.nom)
     
     assert pers3.get_energie_depart() == 150
     
@@ -239,4 +241,3 @@ if __name__ == '__main__':
     assert pers3.to_string() == "Larry a une énergie de 0"
     print("Tests réussis!")
     
-   
