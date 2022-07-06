@@ -11,7 +11,7 @@ class Guerrier(Personnage):
         gain_force_defaut (int): Le gain de force lors d'une resitution d'énergie
         force (int): La force courante du guerrier
     """
-    def __init__(self, nom, energie_depart, energie, force):
+    def __init__(self, nom, energie_depart, energie_courante, force):
         """
         Le constructeur du Guerrier. Il doit initialiser le nom, l’énergie de départ, l’énergie courante et la force. 
         NB: pensez à optimiser votre code et utiliser le constructeur de la classe parente.
@@ -27,8 +27,7 @@ class Guerrier(Personnage):
         self.perte_force_defaut = 2
         self.gain_force_defaut = 10
         self.force = 0
-        self.energie_depart = energie_depart
-        self.energie = energie
+        self.energie_courante = energie_courante
         self.force = force
 
     def to_string(self):
@@ -39,7 +38,7 @@ class Guerrier(Personnage):
         Returns (str): La chaîne représentant le guerrier.
         """
 
-        return "Le guerrier {} a une énergie de {} et une force de {}.".format(self.nom, self.energie, self.force)
+        return "Le guerrier {} a une énergie de {} et une force de {}.".format(self.nom, self.energie_courante, self.force)
 
     def valider_force(self, force):
         """
@@ -69,10 +68,10 @@ class Guerrier(Personnage):
             force_attaque (int): La force de l'attaque 
         """
         if force_attaque >= self.energie:
-            self.energie = 0
+            self.energie_courante = 0
             self.force = 0
         else:
-            self.energie -= force_attaque
+            self.energie_courante -= force_attaque
             if self.force != 0:
                 self.force -= self.perte_force_defaut
 
@@ -83,7 +82,7 @@ class Guerrier(Personnage):
         augmente sa force (la valeur de force) par la valeur de gain_force_defaut jusqu’à concurrence de 
         la force maximale sans jamais la dépasser.       
         """
-        self.energie = self.energie_depart
+        self.energie_courante = self.energie_depart
         if self.force <= self.force_max:
             self.force += self.gain_force_defaut
 
@@ -128,11 +127,11 @@ if __name__ == '__main__':
 
     guer1.attaquer(20)
     assert guer1.force == 0
-    assert guer1.energie == 0
+    assert guer1.energie_courante == 0
 
     guer1.reset_energie()
     assert guer1.force == 10
-    assert guer1.energie == 20
+    assert guer1.energie_courante == 20
 
     assert guer1.get_force() == 10
     assert guer2.get_force() == 81
