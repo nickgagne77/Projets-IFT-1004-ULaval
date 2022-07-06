@@ -146,10 +146,7 @@ class GestionPersonnages:
         else:
             messagebox.showinfo("Erreur", message="Il n'y a aucun personnage sélectionné.")
         if not personnage.est_mort():
-            if isinstance(personnage, Sorcier):
-                messagebox.showinfo("Cri du personnage", message="Je vais tous vous anéantir!")
-            elif isinstance(personnage, Guerrier):
-                messagebox.showinfo("Cri du personnage", message="Vous allez goûter à la puissance de mon épée!")
+            messagebox.showinfo("Cri du personnage", message=personnage.crier())
         else:
             messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
 

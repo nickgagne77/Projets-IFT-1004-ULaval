@@ -47,7 +47,8 @@ class Interface(Frame):
         self.scrollbar.grid(row=0, column=1)
         self.listbox.config(yscrollcommand=self.scrollbar.set)  
         self.scrollbar.config(command=self.listbox.yview)
-        self.listbox.bind('<Button-1>', self.listbox_Click)
+        self.listbox.bind("<<ListboxSelect>>", self.listbox_Click)
+        self.var = IntVar()
         # Ajout de bouttons
         self.creer_sorcier_bouton = Button(self.frame1, text="Créer un sorcier", height=4, width=26)
         self.creer_sorcier_bouton.bind('<Button-1>', self.btnSorcier_Click)
@@ -94,16 +95,13 @@ class Interface(Frame):
     def listbox_Click(self, event):
         widget = event.widget
         #selection=widget.curselection()
-        try:
-            index = widget.curselection()[0]
-        except IndexError:
-            index = 0
+        index = widget.curselection()[0]
+        self.pIndex = index
+        print(self.gp.get_personnage(index))
+
         
         #value = widget.get(selection[0])
         #print ("selection:", selection, ": '%s'" % value)
-
-        self.pIndex = index
-        print(self.gp.get_personnage(index))
 
 
     def menuOuvrir_Click(self):
