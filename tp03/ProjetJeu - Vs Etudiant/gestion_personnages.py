@@ -122,8 +122,8 @@ class GestionPersonnages:
             index (int): L'indice du personnage sélectionné ou -1 si aucun n'est sélectionné. 
         """
         if index != -1:
-            if not self.liste_personnages[index].est_mort():
-                personnage = self.liste_personnages[index]
+            personnage = self.liste_personnages[index]
+            if not personnage.est_mort():
                 force_attaque = Util().saisir_objet_entier("Entrez la force de l'attaque? (Une valeur positive plus petite que 101)")
                 if personnage.valider_energie_courante(force_attaque):
                     personnage.attaquer(force_attaque)
@@ -155,8 +155,8 @@ class GestionPersonnages:
             index (int): L'indice du personnage sélectionné ou -1 si aucun n'est sélectionné. 
         """
         if index != -1:
+            personnage = self.liste_personnages[index]
             if not personnage.est_mort():
-                personnage = self.liste_personnages[index]
                 messagebox.showinfo("Cri du personnage", message=personnage.crier())
             else:
                 messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
