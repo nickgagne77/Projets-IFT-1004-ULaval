@@ -50,9 +50,9 @@ class Util:
         for ligne in liste_lignes:
             ligne_tmp = (ligne.rstrip('\n').split(';'))
             if ligne_tmp[0] == "Sorcier":
-                liste_personnages.append(Sorcier(ligne_tmp[1], ligne_tmp[2], int(ligne_tmp[3]), int(ligne_tmp[4])))
+                liste_personnages.append(Sorcier(ligne_tmp[1], int(ligne_tmp[2]), int(ligne_tmp[3]), int(ligne_tmp[4])))
             else:
-                liste_personnages.append(Guerrier(ligne_tmp[1], ligne_tmp[2], int(ligne_tmp[3]), int(ligne_tmp[4])))
+                liste_personnages.append(Guerrier(ligne_tmp[1], int(ligne_tmp[2]), int(ligne_tmp[3]), int(ligne_tmp[4])))
         return True
 
 
