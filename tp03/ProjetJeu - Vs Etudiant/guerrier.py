@@ -18,27 +18,28 @@ class Guerrier(Personnage):
         Args:
             nom (str): Le nom du guerrier 
             energie_depart (int): L'énergie de départ du guerrier 
-            energie(int): L'énergie courante du guerrier
+            energie_courante(int): L'énergie courante du guerrier
             force (int): La force du guerrier 
         """
         super().__init__(nom, energie_depart)
+        # la ligne 26 peut être omise puisqu'elle n'a aucune utilité
         self.force_defaut = 20
         self.force_max = 80
         self.perte_force_defaut = 2
         self.gain_force_defaut = 10
-        self.force = 0
-        self.energie_courante = energie_courante
+        # L'attribut energie_courante est obtenue de la classe parente
+        # self.energie_courante = energie_courante
+        # Bien que les consignes indiquent que l'attribut force = 0, il ne s'agit que d'une borne inférieure
         self.force = force
-
-    def to_string(self):
+        
+    def to_string(self, classe_perso=1):
         """
         Retourne une chaîne du genre: "Le guerrier, nom de Personnage, a une énergie de valeur de
         l’énergie et une force de valeur de la force."
 
         Returns (str): La chaîne représentant le guerrier.
         """
-
-        return "Le guerrier {} a une énergie de {} et une force de {}.".format(self.nom, self.energie_courante, self.force)
+        return super().to_string(classe_perso)
 
     def valider_force(self, force):
         """
@@ -118,6 +119,8 @@ if __name__ == '__main__':
     print()
     print("Tests unitaires en cours...")
     print()
+    
+    assert type(guer1) == Guerrier
 
     assert guer1.to_string() == "Le guerrier Max a une énergie de 20 et une force de 20."
 
