@@ -22,11 +22,12 @@ class Interface(Frame):
         menu = Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label="Fichier", menu=menu)
         menu.add_command(label="Ouvrir...", command=self.menuOuvrir_Click)
+        # Ajout de labels dans les frames
+        # ajouter les autres options
         menu.add_command(label="Enregistrer", command=self.menuEnregistrer_Click)
         menu.add_command(label="Enregistrer sous...", command=self.menuEnregistrerSous_Click)
         menu.add_command(label="Vider liste", command=self.menuViderListe_Click)
         menu.add_command(label="Quitter", command=self.menuQuitter_Click)
-        # ajouter les autres options
 
         self.master.config(menu=self.menubar)
 
@@ -36,7 +37,6 @@ class Interface(Frame):
         # frame 2 (gauche)
         self.frame2 = Frame(self)
         self.frame2.grid(row=0, column=0, padx=10, pady=10)
-        # Ajout de labels dans les frames
 
         # Ajout du listbox
         self.scrollbar = Scrollbar(self.frame2, orient="vertical")
@@ -64,8 +64,6 @@ class Interface(Frame):
         self.attaquer_bouton.grid(row=2, column=0, sticky=N, pady=4, padx=1)
         self.redonner_energie_bouton.grid(row=3, column=0, sticky=N, pady=4, padx=1)
         self.crier_bouton.grid(row=4, column=0, sticky=N, pady=4, padx=1)
-
-        # TODO, faire en sorte que les boutons se replace apres un clic
 
     def listIsEmpty(self):
         try:
