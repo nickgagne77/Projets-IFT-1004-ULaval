@@ -27,7 +27,6 @@ class Sorcier(Personnage):
         # L'attribut energie_courante est obtenue de la classe parente
         # self.energie_courante = energie_courante
 
-
     def to_string(self, classe_perso=2):
         """
         Retourne une chaîne du genre "Le sorcier, nom de Personnage, a une énergie de, valeur de l’énergie et,
