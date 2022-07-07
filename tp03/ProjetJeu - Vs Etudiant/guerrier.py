@@ -83,8 +83,10 @@ class Guerrier(Personnage):
         la force maximale sans jamais la dépasser.       
         """
         self.energie_courante = self.energie_depart
-        if self.force <= self.force_max:
+        if self.force <= self.force_max and (self.force + self.gain_force_defaut) <= self.force_max:
             self.force += self.gain_force_defaut
+        else:
+            self.force = self.force_max
 
     def get_force(self):
         """
