@@ -32,7 +32,7 @@ class Guerrier(Personnage):
         # Bien que les consignes indiquent que l'attribut force = 0, il ne s'agit que d'une borne inférieure
         self.force = force
         
-    def to_string(self, classe_perso=1):
+    def to_string(self):
         """
         Retourne une chaîne du genre: "Le guerrier, nom de Personnage, a une énergie de valeur de
         l’énergie et une force de valeur de la force."
