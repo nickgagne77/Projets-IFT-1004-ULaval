@@ -190,8 +190,7 @@ class GestionPersonnages:
         un message d’erreur est affiché.
         """
         if self.liste_personnages != []:
-            if messagebox.askokcancel("Enregistrer sous...", message="Désirez vous enregistrer la liste courante?"):
-                self.gestion_enregistrer_sous()
+            self.gestion_vider_liste()
         filetypes = filetypes = (('text files', '*.txt'),('All files', '*.*'))        
         f = filedialog.askopenfilename(filetypes=filetypes)
         if f != None:
