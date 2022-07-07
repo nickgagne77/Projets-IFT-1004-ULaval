@@ -39,7 +39,7 @@ class Guerrier(Personnage):
 
         Returns (str): La chaîne représentant le guerrier.
         """
-        return super().to_string(classe_perso)
+        return "Le guerrier " + super().to_string() + " et une force de {}.".format(self.force)
 
     def valider_force(self, force):
         """

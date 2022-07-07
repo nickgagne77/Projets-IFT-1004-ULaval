@@ -27,13 +27,13 @@ class Sorcier(Personnage):
         # L'attribut energie_courante est obtenue de la classe parente
         # self.energie_courante = energie_courante
 
-    def to_string(self, classe_perso=2):
+    def to_string(self):
         """
         Retourne une chaîne du genre "Le sorcier, nom de Personnage, a une énergie de, valeur de l’énergie et,
         valeur du nombre de charmes, charmes."
         Returns (str): La chaîne représentant le Sorcier.
         """
-        return super().to_string(classe_perso)
+        return "Le sorcier " + super().to_string() + " et {} charmes.".format(self.nbr_charmes)
 
     def valider_nbr_charmes(self, nb_charmes):
         """
