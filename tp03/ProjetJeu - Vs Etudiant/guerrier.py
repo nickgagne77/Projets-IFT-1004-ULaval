@@ -67,7 +67,7 @@ class Guerrier(Personnage):
         Args:
             force_attaque (int): La force de l'attaque 
         """
-        if force_attaque >= self.energie:
+        if force_attaque >= self.energie_courante:
             self.energie_courante = 0
             self.force = 0
         else:

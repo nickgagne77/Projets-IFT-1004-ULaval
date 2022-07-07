@@ -1,10 +1,13 @@
 from tkinter.filedialog import *
-from tkinter import simpledialog
+from tkinter import messagebox, simpledialog
 from sorcier import Sorcier
 from guerrier import Guerrier
 import sys
  
 class MauvaisFormatException(Exception):
+    pass
+
+class Annuler(Exception):
     pass
 class Util:
     """
@@ -47,9 +50,9 @@ class Util:
         for ligne in liste_lignes:
             ligne_tmp = (ligne.rstrip('\n').split(';'))
             if ligne_tmp[0] == "Sorcier":
-                liste_personnages.append(Sorcier(ligne_tmp[1], ligne_tmp[2], ligne_tmp[3], ligne_tmp[4]))
+                liste_personnages.append(Sorcier(ligne_tmp[1], ligne_tmp[2], int(ligne_tmp[3]), int(ligne_tmp[4])))
             else:
-                liste_personnages.append(Guerrier(ligne_tmp[1], ligne_tmp[2], ligne_tmp[3], ligne_tmp[4]))
+                liste_personnages.append(Guerrier(ligne_tmp[1], ligne_tmp[2], int(ligne_tmp[3]), int(ligne_tmp[4])))
         return True
 
 
@@ -94,12 +97,16 @@ class Util:
 
         while not valide:
             objet_entier = simpledialog.askstring("Saisie d'un entier", question)
+            if objet_entier == None:
+                raise Annuler
 
             try:
                 objet_entier = int(objet_entier)
                 valide = True
             except ValueError:
-                print("aucune sasie")
+                messagebox.showerror("Erreur", message="Aucune saisiee effectuée.")
+            
+                
 
         return objet_entier
 
@@ -120,11 +127,12 @@ class Util:
 
         while string_temp == "" and not valide:
             string_temp = simpledialog.askstring("Saisie d'une chaine de caractères", question)
+            if string_temp == None:
+                raise Annuler
 
             if string_temp == "":
-                print("aucune saisie")
+                messagebox.showerror("Erreur", message="Aucune saisie effectuée.")
             else:
                 valide = True
 
         return string_temp
-

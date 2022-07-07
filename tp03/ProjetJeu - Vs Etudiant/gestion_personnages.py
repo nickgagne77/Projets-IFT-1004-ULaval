@@ -1,7 +1,8 @@
+from tkinter import filedialog
 from tkinter.filedialog import *
 from tkinter import messagebox
 
-from util import Util
+from util import Util, Annuler
 from personnage import Personnage
 from sorcier import Sorcier
 from guerrier import Guerrier
@@ -48,7 +49,7 @@ class GestionPersonnages:
         Sinon, on affiche seulement que le sorcier n’a pas été ajouté.
         """
         personnage = self.saisir_et_creer_sorcier()
-        if personnage is not None:
+        if personnage != None:
             self.ajouter_personnage(personnage)
             messagebox.showinfo("Ajout d'un Sorcier", message="Le nouveau Sorcier a été ajouté à la liste")
         else:
@@ -62,16 +63,19 @@ class GestionPersonnages:
 
         Return (Sorcier): Le sorcier instancié si la création a réussie, None sinon.
         """
-        nom = Util.saisir_string("Saisir le nom du Sorcier? (Entre 3 et 30)")
-        energie_depart = Util.saisir_objet_entier(
-            "Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
-        charmes = Util.saisir_objet_entier("Donnez la valeur de charmes? (une valeur positive plus petite que 21)")
+        try:
+            nom = Util.saisir_string("Saisir le nom du Sorcier? (Entre 3 et 30)")
+            energie_depart = Util.saisir_objet_entier(
+                "Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
+            charmes = Util.saisir_objet_entier("Donnez la valeur de charmes? (une valeur positive plus petite que 21)")
+        except Annuler:
+            return None
         sorcier = Sorcier(nom, energie_depart, energie_depart, charmes)
         if sorcier.valider_energie_depart(sorcier.energie_depart) and sorcier.valider_nbr_charmes(
                 sorcier.nbr_charmes) and sorcier.valider_nom(sorcier.nom):
             return sorcier
         else:
-            None
+            return None
 
     def gestion_creer_guerrier(self):
         """
@@ -80,7 +84,7 @@ class GestionPersonnages:
         Sinon, on affiche seulement que le sorcier n’a pas été ajouté.
         """
         personnage = self.saisir_et_creer_guerrier()
-        if personnage is not None:
+        if personnage != None:
             self.ajouter_personnage(personnage)
             messagebox.showinfo("Ajout d'un Guerrier", message="Le nouveau Guerrier a été ajouté à la liste")
         else:
@@ -94,16 +98,19 @@ class GestionPersonnages:
 
         Returns (Guerrier): Le guerrier instancié si la création a réussie, None sinon.
         """
-        nom = Util.saisir_string("Saisir le nom du Guerrier (entre 3 et 30): ")
-        energie_depart = Util.saisir_objet_entier(
-            "Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
-        forces = Util.saisir_objet_entier("Donnez la valeur de la force? (une valeur positive plus petite que 81)")
+        try:
+            nom = Util.saisir_string("Saisir le nom du Guerrier (entre 3 et 30): ")
+            energie_depart = Util.saisir_objet_entier(
+                "Donnez la valeur de l'énergie de départ? (Une valeur positive plus petite que 101)")
+            forces = Util.saisir_objet_entier("Donnez la valeur de la force? (une valeur positive plus petite que 81)")
+        except Annuler:
+            return None
         guerrier = Guerrier(nom, energie_depart, energie_depart, forces)
         if guerrier.valider_energie_depart(guerrier.energie_depart) and guerrier.valider_force(
                 guerrier.force) and guerrier.valider_nom(guerrier.nom):
             return guerrier
         else:
-            None
+            return None
 
     def ajouter_personnage(self, personnage):
         """
@@ -132,11 +139,11 @@ class GestionPersonnages:
                 if personnage.valider_energie_courante(force_attaque):
                     personnage.attaquer(force_attaque)
                 else:
-                    messagebox.showinfo("Erreur", message="L'attaque ne peut être réalisée.")
+                    messagebox.showerror("Erreur", message="L'attaque ne peut être réalisée.")
             else:
-                messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
+                messagebox.showerror("Erreur", message="Le personnage selectionné est mort.")
         else:
-            messagebox.showinfo("Erreur", message="Il n'y a aucun personnage sélectionné.")
+            messagebox.showerror("Erreur", message="Il n'y a aucun personnage sélectionné.")
 
     def gestion_augmenter_energie(self, index):
         """
@@ -151,9 +158,9 @@ class GestionPersonnages:
             if not personnage.est_mort():
                 personnage.reset_energie()
             else:
-                messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
+                messagebox.showerror("Erreur", message="Le personnage selectionné est mort.")
         else:
-            messagebox.showinfo("Erreur", message="Il n'y a aucun personnage sélectionné.")
+            messagebox.showerror("Erreur", message="Il n'y a aucun personnage sélectionné.")
 
     def gestion_crier(self, index):
         """
@@ -182,7 +189,22 @@ class GestionPersonnages:
         et si la lecture du fichier n’a pas bien fonctionné (voir méthode lireFichierPersonnages dans classe Util),
         un message d’erreur est affiché.
         """
-
+        if self.liste_personnages != []:
+            if messagebox.askokcancel("Enregistrer sous...", message="Désirez vous enregistrer la liste courante?"):
+                self.gestion_enregistrer_sous()
+            else:
+                self.liste_personnages = []
+        filetypes = filetypes = (('text files', '*.txt'),('All files', '*.*'))        
+        f = filedialog.askopenfilename(filetypes=filetypes)
+        if f != None:
+            self.fichier_courant = f
+            resultat = Util().lire_fichier_personnages(self.fichier_courant, self.liste_personnages)
+            if not resultat:
+                messagebox.showerror("Erreur", message="La lecture du fichier n'a pas bien fonctionné")
+                self.fichier_courant = None
+        else:
+            messagebox.showerror("Erreur", message="Aucun fichier n'a été choisi.")
+              
     def gestion_enregistrer(self):
         """
         Permet de gérer l'enregistrement d'une liste de personnages dans le fichier courant.
@@ -191,6 +213,14 @@ class GestionPersonnages:
         Si l’enregistrement n’a pas fonctionné, un message d’erreur est affiché. Si on n’a pas de fichier courant,
         on enregistre dans un nouveau fichier en appelant la méthode (gestion_enregistrer_sous).
         """
+        if self.fichier_courant != None:
+            resultat = Util().ecrire_fichier_personnages(self.fichier_courant, self.liste_personnages)
+            if resultat:
+                messagebox.showinfo("Succès", message="Fichier enregistré avec succès!")
+            else:
+                messagebox.showerror("Erreur", message="Enregistrement du fichier a échoué.")
+        else:
+            self.gestion_enregistrer_sous()
 
     def gestion_enregistrer_sous(self):
         """
@@ -199,7 +229,15 @@ class GestionPersonnages:
         dedans les personnages (voir méthode ecrire_fichier_personnages dans la classe Util).
         Afficher un message personnalisé s’il y a erreur lors de la sauvegarde ou si la sauvegarde est ok.
         """
-
+       # self.fichier_courant = Util().saisir_string("Entrez le nom du fichier (sans l'extension .txt)") + '.txt'
+        filetypes = filetypes = (('text files', '*.txt'),('All files', '*.*'))  
+        self.fichier_courant = filedialog.asksaveasfilename(filetypes=filetypes)
+        resultat = Util().ecrire_fichier_personnages(self.fichier_courant, self.liste_personnages)
+        if resultat:
+            messagebox.showinfo("Succès", message="Fichier enregistré avec succès!")
+        else:
+            messagebox.showerror("Erreur", message="Enregistrement du fichier a échoué.")
+                
     def gestion_vider_liste(self):
         """
         Permet de fermer le fichier courant. Si la liste n'est pas vide et que l'utilisateur veut sauvegarder ses
@@ -207,11 +245,24 @@ class GestionPersonnages:
         nouveau fichier (gestion_enregistrer_sous) s’il n’y a pas de fichier courant.
         La liste est vidée et le fichier courant devient none.
         """
+        if self.liste_personnages != []:
+            if messagebox.askokcancel("Enregistrer sous...", message="Désirez vous enregistrer la liste courante?"):
+                if self.fichier_courant == None:
+                    self.gestion_enregistrer()
+                else:
+                    self.gestion_enregistrer_sous()
+            else:
+                self.liste_personnages = []
+        self.fichier_courant = None
 
     def gestion_quitter(self):
         """
         Permet de quitter l'application après confirmation de l'utilisateur.
         """
+        if messagebox.askokcancel("Quitter", message="Désirez-vous vraiment quitter?"):
+            return True
+        else:
+            return False
 
     def get_personnage(self, index):
         return self.liste_personnages[index]

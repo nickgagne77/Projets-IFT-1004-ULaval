@@ -32,10 +32,10 @@ class Interface(Frame):
 
         # frame 1 (droite)
         self.frame1 = Frame(self)
-        self.frame1.grid(row=0, column=1)
+        self.frame1.grid(row=0, column=1, padx=10, pady=10)
         # frame 2 (gauche)
         self.frame2 = Frame(self)
-        self.frame2.grid(row=0, column=0)
+        self.frame2.grid(row=0, column=0, padx=10, pady=10)
         # Ajout de labels dans les frames
 
         # Ajout du listbox
@@ -49,15 +49,15 @@ class Interface(Frame):
         self.var = IntVar()
         # Ajout de bouttons
         self.creer_sorcier_bouton = Button(self.frame1, text="Créer un sorcier", height=4, width=26)
-        self.creer_sorcier_bouton.bind('<Button-1>', self.btnSorcier_Click)
+        self.creer_sorcier_bouton.bind('<ButtonRelease-1>', self.btnSorcier_Click)
         self.creer_guerrier_bouton = Button(self.frame1, text="Créer un guerrier", height=4, width=26)
-        self.creer_guerrier_bouton.bind('<Button-1>', self.btnGuerrier_Click)
+        self.creer_guerrier_bouton.bind('<ButtonRelease-1>', self.btnGuerrier_Click)
         self.attaquer_bouton = Button(self.frame1, text="Attaquer", height=4, width=26)
-        self.attaquer_bouton.bind('<Button-1>', self.btnAttaquer_Click)
+        self.attaquer_bouton.bind('<ButtonRelease-1>', self.btnAttaquer_Click)
         self.redonner_energie_bouton = Button(self.frame1, text="Réinitialiser l'Énergie", height=4, width=26)
-        self.redonner_energie_bouton.bind('<Button-1>', self.btnRedonnerEnergie_Click)
+        self.redonner_energie_bouton.bind('<ButtonRelease-1>', self.btnRedonnerEnergie_Click)
         self.crier_bouton = Button(self.frame1, text="Crier", height=4, width=26)
-        self.crier_bouton.bind('<Button-1>', self.btnCrier_Click)
+        self.crier_bouton.bind('<ButtonRelease-1>', self.btnCrier_Click)
 
         self.creer_sorcier_bouton.grid(row=0, column=0, sticky=N, pady=4, padx=1)
         self.creer_guerrier_bouton.grid(row=1, column=0, sticky=N, pady=4, padx=1)
@@ -94,7 +94,7 @@ class Interface(Frame):
         # selection=widget.curselection()
         index = widget.curselection()[0]
         self.pIndex = index
-        print(self.gp.get_personnage(index))
+        #print(self.gp.get_personnage(index))
 
         # value = widget.get(selection[0])
         # print ("selection:", selection, ": '%s'" % value)
