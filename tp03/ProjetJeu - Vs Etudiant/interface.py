@@ -33,16 +33,16 @@ class Interface(Frame):
 
         # frame 1 (droite)
         self.frame1 = Frame(self)
-        self.frame1.grid(row=0, column=1, padx=10, pady=10)
+        self.frame1.pack(side=RIGHT,expand=YES)  #row=0, column=1, padx=10, pady=10
         # frame 2 (gauche)
         self.frame2 = Frame(self)
-        self.frame2.grid(row=0, column=0, padx=10, pady=10)
+        self.frame2.pack(side=LEFT, expand=YES)   # row=0, column=0, padx=10, pady=10
 
         # Ajout du listbox
         self.scrollbar = Scrollbar(self.frame2, orient="vertical")
-        self.listbox = Listbox(self.frame2, height=25, width=80)
-        self.listbox.grid(row=0, column=0)
-        self.scrollbar.grid(row=0, column=1)
+        self.listbox = Listbox(self.frame2, height=24, width=80)
+        self.listbox.pack(side=LEFT, expand=YES)  #.grid(row=0, column=0)
+        self.scrollbar.pack(side=RIGHT, expand=YES) # .grid(row=0, column=1)
         self.listbox.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.listbox.yview)
         self.listbox.bind("<<ListboxSelect>>", self.listbox_Click)
@@ -59,11 +59,11 @@ class Interface(Frame):
         self.crier_bouton = Button(self.frame1, text="Crier", height=4, width=26)
         self.crier_bouton.bind('<ButtonRelease-1>', self.btnCrier_Click)
 
-        self.creer_sorcier_bouton.grid(row=0, column=0, sticky=N, pady=4, padx=1)
-        self.creer_guerrier_bouton.grid(row=1, column=0, sticky=N, pady=4, padx=1)
-        self.attaquer_bouton.grid(row=2, column=0, sticky=N, pady=4, padx=1)
-        self.redonner_energie_bouton.grid(row=3, column=0, sticky=N, pady=4, padx=1)
-        self.crier_bouton.grid(row=4, column=0, sticky=N, pady=4, padx=1)
+        self.creer_sorcier_bouton.pack(side=TOP) #.grid(row=0, column=0, sticky=N, pady=4, padx=1)
+        self.creer_guerrier_bouton.pack(side=TOP) # .grid(row=1, column=0, sticky=N, pady=4, padx=1)
+        self.attaquer_bouton.pack(side=TOP) # .grid(row=2, column=0, sticky=N, pady=4, padx=1)
+        self.redonner_energie_bouton.pack(side=TOP) # .grid(row=3, column=0, sticky=N, pady=4, padx=1)
+        self.crier_bouton.pack(side=TOP) #.grid(row=4, column=0, sticky=N, pady=4, padx=1)
 
     def listIsEmpty(self):
         try:
@@ -177,7 +177,7 @@ class Interface(Frame):
 
 def main():
     root = Tk()
-    root.geometry("1010x420+300+100")
+    root.geometry("900x400+300+100")
     app = Interface(root)
     app.mainloop()
 

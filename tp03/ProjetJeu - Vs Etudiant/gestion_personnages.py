@@ -192,8 +192,6 @@ class GestionPersonnages:
         if self.liste_personnages != []:
             if messagebox.askokcancel("Enregistrer sous...", message="Désirez vous enregistrer la liste courante?"):
                 self.gestion_enregistrer_sous()
-            #else:
-            #    self.liste_personnages = []
         filetypes = filetypes = (('text files', '*.txt'),('All files', '*.*'))        
         f = filedialog.askopenfilename(filetypes=filetypes)
         if f != None:
