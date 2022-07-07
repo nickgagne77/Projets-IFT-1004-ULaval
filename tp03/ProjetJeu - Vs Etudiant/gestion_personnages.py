@@ -243,7 +243,7 @@ class GestionPersonnages:
         La liste est vidée et le fichier courant devient none.
         """
         if self.liste_personnages != []:
-            if messagebox.askokcancel("Enregistrer sous...", message="Désirez vous enregistrer la liste courante?"):
+            if messagebox.askyesno("Enregistrer sous...", message="Désirez vous enregistrer la liste courante?"):
                 if self.fichier_courant == None:
                     self.gestion_enregistrer()
                 else:
@@ -255,7 +255,7 @@ class GestionPersonnages:
         """
         Permet de quitter l'application après confirmation de l'utilisateur.
         """
-        if messagebox.askokcancel("Quitter", message="Désirez-vous vraiment quitter?"):
+        if messagebox.askyesno("Quitter", message="Désirez-vous vraiment quitter?"):
             return True
         else:
             return False
