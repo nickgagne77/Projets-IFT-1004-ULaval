@@ -7,7 +7,6 @@ from personnage import Personnage
 from sorcier import Sorcier
 from guerrier import Guerrier
 
-
 class GestionPersonnages:
     """
     Classe s'occupant de la gestion des personnages.
@@ -175,7 +174,7 @@ class GestionPersonnages:
             if not personnage.est_mort():
                 messagebox.showinfo("Cri du personnage", message=personnage.crier())
             else:
-                messagebox.showinfo("Erreur", message="Le personnage selectionné est mort.")
+                messagebox.showerror("Erreur", message="Le personnage selectionné est mort.")
         else:
             messagebox.showinfo("Erreur", message="Il n'y a aucun personnage sélectionné.")
 
