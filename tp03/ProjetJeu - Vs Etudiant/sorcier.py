@@ -112,10 +112,11 @@ if __name__ == '__main__':
     assert sorc1.crier() == "Je vais tous vous anéantir!"
 
     sorc1.attaquer(5)
-    assert sorc1.energie_courante == 15
+    assert sorc1.energie_courante == 5
 
     sorc1.attaquer(-5)
-    assert sorc1.energie_courante == 20
+    assert sorc1.energie_courante == 10
+
 
     sorc1.attaquer(sorc1.energie_courante)
     assert sorc1.energie_courante == 0
