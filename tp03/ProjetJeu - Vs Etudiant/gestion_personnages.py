@@ -251,9 +251,8 @@ class GestionPersonnages:
                     self.gestion_enregistrer()
                 else:
                     self.gestion_enregistrer_sous()
-            else:
-                self.liste_personnages = []
         self.fichier_courant = None
+        self.liste_personnages = []
 
     def gestion_quitter(self):
         """
