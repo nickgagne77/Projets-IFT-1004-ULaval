@@ -176,7 +176,7 @@ class GestionPersonnages:
             else:
                 messagebox.showerror("Erreur", message="Le personnage selectionné est mort.")
         else:
-            messagebox.showinfo("Erreur", message="Il n'y a aucun personnage sélectionné.")
+            messagebox.showerror("Erreur", message="Il n'y a aucun personnage sélectionné.")
 
     def gestion_ouvrir(self):
         """
