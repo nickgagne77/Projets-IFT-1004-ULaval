@@ -90,8 +90,13 @@ class Interface(Frame):
     def listbox_Click(self, event):
         widget = event.widget
         # selection=widget.curselection()
-        index = widget.curselection()[0]
-        self.pIndex = index
+        try:
+            index = widget.curselection()[0]
+            self.pIndex = index
+        # Survient si on aucun personnage sélectionné et on accroche un bouton
+        except IndexError:
+            pass
+            
         #print(self.gp.get_personnage(index))
 
         # value = widget.get(selection[0])
