@@ -30,19 +30,21 @@ class Interface(Frame):
         menu.add_command(label="Quitter", command=self.menuQuitter_Click)
 
         self.master.config(menu=self.menubar)
+        
+        # Methode .pack() utilisée car meilleur résultat su MacOS et Windows
 
         # frame 1 (droite)
         self.frame1 = Frame(self)
-        self.frame1.pack(side=RIGHT,expand=YES)  #row=0, column=1, padx=10, pady=10
+        self.frame1.pack(side=RIGHT,expand=YES) 
         # frame 2 (gauche)
         self.frame2 = Frame(self)
-        self.frame2.pack(side=LEFT, expand=YES)   # row=0, column=0, padx=10, pady=10
+        self.frame2.pack(side=LEFT, expand=YES)   
 
         # Ajout du listbox
         self.scrollbar = Scrollbar(self.frame2, orient="vertical")
         self.listbox = Listbox(self.frame2, height=24, width=80)
-        self.listbox.pack(side=LEFT, expand=YES)  #.grid(row=0, column=0)
-        self.scrollbar.pack(side=RIGHT, expand=YES) # .grid(row=0, column=1)
+        self.listbox.pack(side=LEFT, expand=YES) 
+        self.scrollbar.pack(side=RIGHT, expand=YES) 
         self.listbox.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.listbox.yview)
         self.listbox.bind("<<ListboxSelect>>", self.listbox_Click)
@@ -58,12 +60,14 @@ class Interface(Frame):
         self.redonner_energie_bouton.bind('<ButtonRelease-1>', self.btnRedonnerEnergie_Click)
         self.crier_bouton = Button(self.frame1, text="Crier", height=4, width=26)
         self.crier_bouton.bind('<ButtonRelease-1>', self.btnCrier_Click)
-
-        self.creer_sorcier_bouton.pack(side=TOP) #.grid(row=0, column=0, sticky=N, pady=4, padx=1)
-        self.creer_guerrier_bouton.pack(side=TOP) # .grid(row=1, column=0, sticky=N, pady=4, padx=1)
-        self.attaquer_bouton.pack(side=TOP) # .grid(row=2, column=0, sticky=N, pady=4, padx=1)
-        self.redonner_energie_bouton.pack(side=TOP) # .grid(row=3, column=0, sticky=N, pady=4, padx=1)
-        self.crier_bouton.pack(side=TOP) #.grid(row=4, column=0, sticky=N, pady=4, padx=1)
+        
+        # Methode .pack() utilisée car meilleur résultat su MacOS et Windows
+        
+        self.creer_sorcier_bouton.pack(side=TOP) 
+        self.creer_guerrier_bouton.pack(side=TOP) 
+        self.attaquer_bouton.pack(side=TOP) 
+        self.redonner_energie_bouton.pack(side=TOP)
+        self.crier_bouton.pack(side=TOP) 
 
     def listIsEmpty(self):
         try:
