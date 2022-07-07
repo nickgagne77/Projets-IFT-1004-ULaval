@@ -27,8 +27,6 @@ class Guerrier(Personnage):
         self.force_max = 80
         self.perte_force_defaut = 2
         self.gain_force_defaut = 10
-        # L'attribut energie_courante est obtenue de la classe parente
-        # self.energie_courante = energie_courante
         # Bien que les consignes indiquent que l'attribut force = 0, il ne s'agit que d'une borne inférieure
         self.force = force
         

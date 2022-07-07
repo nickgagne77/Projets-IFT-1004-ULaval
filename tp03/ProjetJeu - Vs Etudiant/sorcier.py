@@ -24,8 +24,6 @@ class Sorcier(Personnage):
         self.nbr_charmes_max = 20
         # Bien que les consignes indiquent que l'attribut nbr_charmes = 0, il ne s'agit que d'une borne inférieure
         self.nbr_charmes = nbr_charmes
-        # L'attribut energie_courante est obtenue de la classe parente
-        # self.energie_courante = energie_courante
 
     def to_string(self):
         """
@@ -43,7 +41,7 @@ class Sorcier(Personnage):
 
         Returns (bool): True si le nombre de charmes est valide, false sinon.
         """
-        return nb_charmes >= 0 and nb_charmes <= self.nbr_charmes_max
+        return 0 <= nb_charmes <= self.nbr_charmes_max
 
     def crier(self):
         """
