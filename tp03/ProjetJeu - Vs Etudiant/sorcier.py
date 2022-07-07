@@ -22,18 +22,19 @@ class Sorcier(Personnage):
         super().__init__(nom, energie_depart)
         self.nbr_charmes_defaut = 20
         self.nbr_charmes_max = 20
-        self.nbr_charmes = 0
+        # Bien que les consignes indiquent que l'attribut nbr_charmes = 0, il ne s'agit que d'une borne inférieure
         self.nbr_charmes = nbr_charmes
-        self.energie_courante = energie_courante
+        # L'attribut energie_courante est obtenue de la classe parente
+        # self.energie_courante = energie_courante
 
 
-    def to_string(self):
+    def to_string(self, classe_perso=2):
         """
         Retourne une chaîne du genre "Le sorcier, nom de Personnage, a une énergie de, valeur de l’énergie et,
         valeur du nombre de charmes, charmes."
         Returns (str): La chaîne représentant le Sorcier.
         """
-        return "Le sorcier {} a une énergie de {} et {} charmes.".format(self.nom, self.energie_courante, self.nbr_charmes)
+        return super().to_string(classe_perso)
 
     def valider_nbr_charmes(self, nb_charmes):
         """
@@ -94,6 +95,8 @@ if __name__ == '__main__':
     print()
     print("Tests unitaires en cours...")
     print()
+    
+    assert type(sorc1) == Sorcier
 
     assert not sorc1.set_nbr_charmes(21)
     sorc1.set_nbr_charmes(10)
