@@ -29,7 +29,7 @@ class Util:
 
         """
         try:
-            f = open(fichier, 'r')
+            f = open(fichier, 'r', encoding='UTF-8')
             liste_lignes = f.readlines()
             f.close()
             for ligne in liste_lignes:
@@ -66,7 +66,7 @@ class Util:
             liste_personnages: Liste de personnages à écrire dans le fichier
         """
         try:
-            f = open(fichier, 'w')
+            f = open(fichier, 'w', encoding='UTF-8')
         except FileNotFoundError:
             return False
         
