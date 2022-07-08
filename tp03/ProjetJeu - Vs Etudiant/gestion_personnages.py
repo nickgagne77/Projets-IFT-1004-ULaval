@@ -172,7 +172,7 @@ class GestionPersonnages:
         if index != -1:
             personnage = self.liste_personnages[index]
             if not personnage.est_mort():
-                messagebox.showinfo("Cri du personnage", message=personnage.crier()).geometry("+300+100")
+                messagebox.showinfo("Cri du personnage", message=personnage.crier())
             else:
                 messagebox.showerror("Erreur", message="Le personnage selectionné est mort.")
         else:
