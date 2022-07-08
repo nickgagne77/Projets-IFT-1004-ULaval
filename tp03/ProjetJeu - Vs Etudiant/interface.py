@@ -41,12 +41,12 @@ class Interface(Frame):
         self.frame2.pack(side=LEFT, expand=YES)   
 
         # Ajout du listbox
-        self.scrollbar = Scrollbar(self.frame2, orient="vertical")
         self.listbox = Listbox(self.frame2, height=24, width=80)
         self.listbox.pack(side=LEFT, expand=YES) 
+        self.scrollbar = Scrollbar(self.frame2, orient="vertical")
         self.scrollbar.pack(side=RIGHT, expand=YES) 
-        self.listbox.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.listbox.yview)
+        self.listbox.config(yscrollcommand=self.scrollbar.set)
         self.listbox.bind("<<ListboxSelect>>", self.listbox_Click)
         self.var = IntVar()
         # Ajout de bouttons
@@ -181,7 +181,7 @@ class Interface(Frame):
 
 def main():
     root = Tk()
-    root.geometry("900x400+300+100")
+    root.geometry("700x400+300+100")
     app = Interface(root)
     app.mainloop()
 
