@@ -1,11 +1,11 @@
 from tkinter import filedialog
 from tkinter.filedialog import *
 from tkinter import messagebox
-
 from util import Util, Annuler
 from personnage import Personnage
 from sorcier import Sorcier
 from guerrier import Guerrier
+
 
 class GestionPersonnages:
     """
@@ -48,6 +48,7 @@ class GestionPersonnages:
         Sinon, on affiche seulement que le sorcier n’a pas été ajouté.
         """
         personnage = self.saisir_et_creer_sorcier()
+        
         if personnage != None:
             self.ajouter_personnage(personnage)
             messagebox.showinfo("Ajout d'un Sorcier", message="Le nouveau Sorcier a été ajouté à la liste")
@@ -69,7 +70,9 @@ class GestionPersonnages:
             charmes = Util.saisir_objet_entier("Donnez la valeur de charmes? (une valeur positive plus petite que 21)")
         except Annuler:
             return None
+        
         sorcier = Sorcier(nom, energie_depart, energie_depart, charmes)
+        
         if sorcier.valider_energie_depart(sorcier.energie_depart) and sorcier.valider_nbr_charmes(
                 sorcier.nbr_charmes) and sorcier.valider_nom(sorcier.nom):
             return sorcier
@@ -83,6 +86,7 @@ class GestionPersonnages:
         Sinon, on affiche seulement que le sorcier n’a pas été ajouté.
         """
         personnage = self.saisir_et_creer_guerrier()
+        
         if personnage != None:
             self.ajouter_personnage(personnage)
             messagebox.showinfo("Ajout d'un Guerrier", message="Le nouveau Guerrier a été ajouté à la liste")
@@ -104,7 +108,9 @@ class GestionPersonnages:
             forces = Util.saisir_objet_entier("Donnez la valeur de la force? (une valeur positive plus petite que 81)")
         except Annuler:
             return None
+        
         guerrier = Guerrier(nom, energie_depart, energie_depart, forces)
+        
         if guerrier.valider_energie_depart(guerrier.energie_depart) and guerrier.valider_force(
                 guerrier.force) and guerrier.valider_nom(guerrier.nom):
             return guerrier
@@ -190,8 +196,10 @@ class GestionPersonnages:
         """
         if self.liste_personnages != []:
             self.gestion_vider_liste()
+            
         filetypes = filetypes = (('text files', '*.txt'),('All files', '*.*'))        
         f = filedialog.askopenfilename(filetypes=filetypes)
+        
         if f != None:
             self.fichier_courant = f
             resultat = Util().lire_fichier_personnages(self.fichier_courant, self.liste_personnages)

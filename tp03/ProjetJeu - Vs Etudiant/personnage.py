@@ -9,7 +9,6 @@ class Personnage:
         nom (str) : Le nom
         energie_depart (int): L'énergie de départ
         energie_courante (int): L'énergie courante
-
     """
     def __init__(self, nom, energie_depart):
         """
@@ -96,7 +95,6 @@ class Personnage:
         Remet l’énergie courante du personnage à sa valeur de départ.
         """
         self.energie_courante = self.energie_depart
-        
 
     def get_energie_courante(self):
         """
@@ -104,7 +102,6 @@ class Personnage:
         Returns (int): L'énergie courante
         """
         return self.energie_courante
-
 
     def set_energie_courante(self, energie_courante):
         """
@@ -120,14 +117,12 @@ class Personnage:
         else:
             return False
 
-
     def get_nom(self):
         """
         Retourne le nom.
         Returns (str): Le nom.
         """
         return self.nom
-
 
     def set_nom(self, nom):
         """
@@ -143,14 +138,12 @@ class Personnage:
         else:
             return False
 
-
     def get_energie_depart(self):
         """
         Retourne l'énergie de départ.
         Returns (int): L'énergie de départ
         """
         return self.energie_depart
-
 
     def set_energie_depart(self, energie_depart):
         """
@@ -240,4 +233,3 @@ if __name__ == '__main__':
     assert pers2.to_string() == "Charles-Edouard a une énergie de 50"
     assert pers3.to_string() == "Larry a une énergie de 0"
     print("Tests réussis!")
-    

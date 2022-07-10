@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter.filedialog import *
-
 from gestion_personnages import GestionPersonnages
 
 
@@ -23,7 +22,7 @@ class Interface(Frame):
         self.menubar.add_cascade(label="Fichier", menu=menu)
         menu.add_command(label="Ouvrir...", command=self.menuOuvrir_Click)
         # Ajout de labels dans les frames
-        # ajouter les autres options
+        # Ajout des autres options
         menu.add_command(label="Enregistrer", command=self.menuEnregistrer_Click)
         menu.add_command(label="Enregistrer sous...", command=self.menuEnregistrerSous_Click)
         menu.add_command(label="Vider liste", command=self.menuViderListe_Click)
@@ -36,6 +35,7 @@ class Interface(Frame):
         # frame 1 (droite)
         self.frame1 = Frame(self)
         self.frame1.pack(side=RIGHT,expand=YES) 
+        
         # frame 2 (gauche)
         self.frame2 = Frame(self)
         self.frame2.pack(side=LEFT, expand=YES)   
@@ -49,6 +49,7 @@ class Interface(Frame):
         self.listbox.config(yscrollcommand=self.scrollbar.set)
         self.listbox.bind("<<ListboxSelect>>", self.listbox_Click)
         self.var = IntVar()
+        
         # Ajout de bouttons
         self.creer_sorcier_bouton = Button(self.frame1, text="Créer un sorcier", height=4, width=26)
         self.creer_sorcier_bouton.bind('<ButtonRelease-1>', self.btnSorcier_Click)
@@ -177,7 +178,7 @@ class Interface(Frame):
         # Garder le focus sur la meme ligne
         self.listbox.select_set(row)
         self.listbox.event_generate("<<ListboxSelect>>")
-
+        
 
 def main():
     root = Tk()
@@ -185,6 +186,6 @@ def main():
     app = Interface(root)
     app.mainloop()
 
-
 if __name__ == '__main__':
     main()
+    

@@ -74,7 +74,6 @@ class Guerrier(Personnage):
             if self.force != 0:
                 self.force -= self.perte_force_defaut
 
-
     def reset_energie(self):
         """
         Permet de remettre l’énergie courante du guerrier à sa valeur de départ (héritage) et 

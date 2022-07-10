@@ -4,11 +4,15 @@ from sorcier import Sorcier
 from guerrier import Guerrier
 import sys
  
+ 
 class MauvaisFormatException(Exception):
     pass
 
+
 class Annuler(Exception):
     pass
+
+
 class Util:
     """
     Classe utilitaire comportant uniquement des méthodes statiques.
@@ -46,6 +50,7 @@ class Util:
             print(sys.stderr, "erreur d'execution dans gestionOuvrir")
             sys.exit(1)
             return False
+        
         ligne_tmp = []
         for ligne in liste_lignes:
             ligne_tmp = (ligne.rstrip('\n').split(';'))
@@ -54,7 +59,6 @@ class Util:
             else:
                 liste_personnages.append(Guerrier(ligne_tmp[1], int(ligne_tmp[2]), int(ligne_tmp[3]), int(ligne_tmp[4])))
         return True
-
 
     @staticmethod
     def ecrire_fichier_personnages(fichier, liste_personnages):
@@ -92,7 +96,6 @@ class Util:
 
         """
         objet_entier = -1
-
         valide = False
 
         while not valide:
@@ -106,10 +109,7 @@ class Util:
             except ValueError:
                 messagebox.showerror("Erreur", message="Aucune saisiee effectuée.")
             
-                
-
         return objet_entier
-
 
     @staticmethod
     def saisir_string(question):
@@ -122,7 +122,6 @@ class Util:
 
         """
         string_temp = ""
-
         valide = False
 
         while string_temp == "" and not valide:
