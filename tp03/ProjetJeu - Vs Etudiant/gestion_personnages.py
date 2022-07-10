@@ -204,7 +204,7 @@ class GestionPersonnages:
             self.fichier_courant = f
             resultat = Util().lire_fichier_personnages(self.fichier_courant, self.liste_personnages)
             if not resultat:
-                messagebox.showerror("Erreur", message="La lecture du fichier n'a pas bien fonctionné")
+                messagebox.showerror("Erreur", message="L'ouverture du fichier n'a pas bien fonctionné")
                 self.fichier_courant = None
         else:
             messagebox.showerror("Erreur", message="Aucun fichier n'a été choisi.")
@@ -220,7 +220,7 @@ class GestionPersonnages:
         if self.fichier_courant != None:
             resultat = Util().ecrire_fichier_personnages(self.fichier_courant, self.liste_personnages)
             if resultat:
-                messagebox.showinfo("Succès", message="Fichier enregistré avec succès!")
+                messagebox.showinfo("Succès", message="Sauvegarde des données effectuée correctement!")
             else:
                 messagebox.showerror("Erreur", message="Enregistrement du fichier a échoué.")
         else:
@@ -238,7 +238,7 @@ class GestionPersonnages:
         self.fichier_courant = filedialog.asksaveasfilename(filetypes=filetypes)
         resultat = Util().ecrire_fichier_personnages(self.fichier_courant, self.liste_personnages)
         if resultat:
-            messagebox.showinfo("Succès", message="Fichier enregistré avec succès!")
+            messagebox.showinfo("Succès", message="Sauvegarde des données effectuée correctement!")
         else:
             messagebox.showerror("Erreur", message="Enregistrement du fichier a échoué.")
                 
@@ -250,7 +250,8 @@ class GestionPersonnages:
         La liste est vidée et le fichier courant devient none.
         """
         if self.liste_personnages != []:
-            if messagebox.askyesno("Enregistrer sous...", message="Désirez vous enregistrer la liste courante?"):
+            if messagebox.askyesno("Enregistrer sous...", 
+                message="Voulez-vous sauvegarder les données courantes avant de vider la liste de personnages?"):
                 if self.fichier_courant == None:
                     self.gestion_enregistrer()
                 else:
@@ -262,7 +263,7 @@ class GestionPersonnages:
         """
         Permet de quitter l'application après confirmation de l'utilisateur.
         """
-        if messagebox.askyesno("Quitter", message="Désirez-vous vraiment quitter?"):
+        if messagebox.askyesno("Quitter", message="Voulez-vous vraiment quitter ce programme?"):
             return True
         else:
             return False
