@@ -93,13 +93,15 @@ if __name__ == '__main__':
     print("Tests unitaires en cours...")
     print()
     
-    assert type(sorc1) == Sorcier
+    assert isinstance(sorc1, Sorcier)
+    assert isinstance(sorc2, Sorcier)
+    assert isinstance(sorc3, Sorcier)
+    assert not isinstance("Spartacus", Sorcier)
 
     assert not sorc1.set_nbr_charmes(21)
     sorc1.set_nbr_charmes(10)
     assert sorc1.nbr_charmes == 10
     assert sorc1.get_nbr_charmes() == 10
-
 
     assert sorc1.valider_nbr_charmes(sorc1.nbr_charmes)
     assert not sorc2.valider_nbr_charmes(sorc2.nbr_charmes)
@@ -108,13 +110,16 @@ if __name__ == '__main__':
     assert sorc2.get_nbr_charmes() == 21
 
     assert sorc1.crier() == "Je vais tous vous anéantir!"
+    try:
+        assert "Spartacus".crier() == "Je vais tous vous anéantir!"
+    except AttributeError:  # Ce n'est pas un Sorcier, donc erreur d'attribut
+        pass
 
     sorc1.attaquer(5)
     assert sorc1.energie_courante == 5
 
     sorc1.attaquer(-5)
     assert sorc1.energie_courante == 10
-
 
     sorc1.attaquer(sorc1.energie_courante)
     assert sorc1.energie_courante == 0

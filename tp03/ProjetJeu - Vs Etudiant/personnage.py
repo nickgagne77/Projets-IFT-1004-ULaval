@@ -1,3 +1,6 @@
+from numpy import isin
+
+
 class Personnage:
     """ 
     Attributes:
@@ -175,6 +178,13 @@ if __name__ == '__main__':
     print()
     print("Tests unitaires en cours...")
     print()
+    
+    assert isinstance(pers1, Personnage)
+    assert isinstance(pers3, Personnage)
+    assert isinstance(pers3, Personnage)
+    assert isinstance(pers4, Personnage)
+    assert not isinstance("Dwight Schrute", Personnage)
+    
     assert pers1.valider_nom(pers1.nom)
     assert not pers2.valider_nom(pers2.nom)
     assert pers3.valider_nom(pers3.nom)
@@ -232,4 +242,5 @@ if __name__ == '__main__':
     assert pers1.to_string() == "Nico a une énergie de 80"
     assert pers2.to_string() == "Charles-Edouard a une énergie de 50"
     assert pers3.to_string() == "Larry a une énergie de 0"
+    
     print("Tests réussis!")

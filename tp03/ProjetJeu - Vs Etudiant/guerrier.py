@@ -117,7 +117,10 @@ if __name__ == '__main__':
     print("Tests unitaires en cours...")
     print()
     
-    assert type(guer1) == Guerrier
+    assert isinstance(guer1, Guerrier)
+    assert isinstance(guer2, Guerrier)
+    assert isinstance(guer3, Guerrier)
+    assert not isinstance("Harry Potter", Guerrier)
 
     assert guer1.to_string() == "Le guerrier Max a une énergie de 20 et une force de 20."
 
@@ -125,7 +128,11 @@ if __name__ == '__main__':
     assert not guer2.valider_force(guer2.force)
     assert guer3.valider_force(guer3.force)
 
-    assert guer1.crier() == "Vous allez goûter à la puissance de mon épée!"
+    assert guer1.crier() == "Vous allez goûter à la puissance de mon épée!"   
+    try:
+        assert "Harry Potter".crier() == "Vous allez goûter à la puissance de mon épée!"
+    except AttributeError:    # Ce n'est pas un Guerrier, donc erreur d'attribut
+        pass
 
     guer1.attaquer(20)
     assert guer1.force == 0
