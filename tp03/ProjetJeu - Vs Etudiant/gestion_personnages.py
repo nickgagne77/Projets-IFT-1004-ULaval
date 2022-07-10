@@ -268,4 +268,13 @@ class GestionPersonnages:
             return False
 
     def get_personnage(self, index):
+        """Methode getter créer uniquement pour valider la selection du personnage
+        dans le définition de la méthode listbox_Click du module interface.py
+
+        Args:
+            index (int): Index du personnage à sélectionner dans notre liste
+
+        Returns:
+            Personnage: Le personnage sélectionné.
+        """
         return self.liste_personnages[index]
