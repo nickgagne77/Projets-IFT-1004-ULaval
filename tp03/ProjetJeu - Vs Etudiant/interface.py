@@ -64,11 +64,11 @@ class Interface(Frame):
         
         # Methode .pack() utilisée car meilleur résultat su MacOS et Windows
         
-        self.creer_sorcier_bouton.pack(side=TOP) 
-        self.creer_guerrier_bouton.pack(side=TOP) 
-        self.attaquer_bouton.pack(side=TOP) 
-        self.redonner_energie_bouton.pack(side=TOP)
-        self.crier_bouton.pack(side=TOP) 
+        self.creer_sorcier_bouton.pack(side=TOP, padx=6, pady=4) 
+        self.creer_guerrier_bouton.pack(side=TOP, padx=6, pady=4) 
+        self.attaquer_bouton.pack(side=TOP, padx=6, pady=4) 
+        self.redonner_energie_bouton.pack(side=TOP, padx=6, pady=4) 
+        self.crier_bouton.pack(side=TOP, padx=6, pady=4) 
 
     def listIsEmpty(self):
         try:
